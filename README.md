@@ -23,3 +23,8 @@ Sentiment Analysis: LSTMs are frequently used in sentiment analysis tasks, where
 Speech Recognition: LSTMs have proven effective in automatic speech recognition (ASR) systems. They can process audio data and convert it into text by learning the acoustic features and phonetic patterns present in speech signals.
 
 Named Entity Recognition (NER): In NLP, NER is the task of identifying and classifying entities (such as names of people, places, and organizations) in text. LSTMs, when combined with conditional random fields (CRFs), have shown excellent performance in NER tasks.
+
+Sentimental Analysis
+```
+https://github.com/AnalyticalHarry/NaturalLanguageProcessingSentimentalAnalysis
+```
