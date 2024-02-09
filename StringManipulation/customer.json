@@ -1,0 +1,17 @@
+{
+    "first_name": "Hemant",
+    "last_name": "Thapa",
+    "age": 25,
+    "city": "Glasgow",
+    "languages": [
+        "English",
+        "Spanish",
+        "Hindi"
+    ],
+    "programming languages": [
+        "Python",
+        "JavaScript",
+        "C++",
+        "R"
+    ]
+}
