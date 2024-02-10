@@ -113,3 +113,8 @@ multiple spaces     and symbols! @#$ Let's see how the preprocess_text function 
 # preprocess_text function to the test text
 processed_text = preprocess_text(test_text)
 print("Processed text:", processed_text)
+
+#Code Created by Hemant Thapa
+#Date: 09.02.2023
+#application : cleaning symbols or special characters from sentences 
+#hemantthapa1998@gmail.com 
