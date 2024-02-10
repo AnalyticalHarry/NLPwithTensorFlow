@@ -41,31 +41,21 @@ train_padded = pad_sequences(train_sequences, maxlen=100)
 test_padded = pad_sequences(test_sequences, maxlen=100)
 
 #creating model 
-model = tf.keras.Sequential([
-    tf.keras.layers.Embedding(input_dim=10000, output_dim=32, input_length=100),
-    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64, return_sequences=True)),
-    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
-    tf.keras.layers.Dense(64, activation='relu'),
-    tf.keras.layers.Dropout(0.5),
-    tf.keras.layers.Dense(6, activation='softmax')
+model = Sequential([
+    Embedding(input_dim=10000, output_dim=32, input_length=100),
+    Conv1D(filters=32, kernel_size=3, padding='same', activation='relu'),
+    MaxPooling1D(pool_size=2),
+    Bidirectional(LSTM(32, dropout=0.2, recurrent_dropout=0.2)),
+    Dense(64, activation='relu'),  # Increased units in the Dense layer
+    Dropout(0.5),  # Adjusted dropout rate
+    Dense(6, activation='softmax')
 ])
 
-#EarlyStopping and ModelCheckpoint callbacks
-early_stopping = EarlyStopping(
-    monitor='val_loss', 
-    patience=3,  
-    verbose=1
-)
-model_checkpoint = ModelCheckpoint(
-    'best_model.h5',  
-    save_best_only=True, 
-    monitor='val_loss', 
-    verbose=1
-)
-
-#compile model 
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-
+#EarlyStopping and ModelCheckpoint callbacks
+early_stopping = EarlyStopping(monitor='val_loss', patience=3, verbose=1)
+model_checkpoint = ModelCheckpoint('improved_model_v2.h5', save_best_only=True, monitor='val_loss', verbose=1)
+reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=2, min_lr=0.001, verbose=1)
 #model summary
 model.summary()
 
@@ -75,10 +65,10 @@ test_labels = test_labels - 1
 history = model.fit(
     train_padded, 
     train_labels, 
-    epochs=10, 
-    batch_size=32, 
+    epochs=10,  
+    batch_size=64,  
     validation_data=(test_padded, test_labels), 
-    callbacks=[early_stopping, model_checkpoint]
+    callbacks=[early_stopping, model_checkpoint, reduce_lr]
 )
 
 test_loss, test_acc = model.evaluate(test_padded, test_labels)
