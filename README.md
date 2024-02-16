@@ -5,6 +5,11 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 ```
+Visualise your neural nets
+```
+https://alexlenail.me/NN-SVG/
+```
+
 
 ##### Recurrent Neural Networks (RNNs):
 
